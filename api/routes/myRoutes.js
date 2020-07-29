@@ -12,11 +12,11 @@ module.exports = function(app) {
     app.route('/show_polyline_for_path_name/:path_name')
        .post(Controller.show_polyline_for_path_name);
 
-//  app.route('/show_paths_for_device_id/')
-  //  .post(Controlλer.show_paths_for_device_id);
+  app.route('/show_paths_for_device_id/:device_id')
+   .post(Controller.show_paths_for_device_id);
 
-  //  app.route('/show_paths_for_device_name/')
-    //  .post(Controller.show_paths_for_device_name);
+   app.route('/show_paths_for_device_name/:device_name')
+     .post(Controller.show_paths_for_device_name);
 
 
 

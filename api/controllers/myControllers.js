@@ -31,8 +31,8 @@ const result = await utilities.resolveAfterNSeconds(2); // perimenw ligo gia na 
   res.json(Http.status)
 };
 
-//async function show_paths_for_device_id(req, res) { };
-//async function show_paths_for_device_name(req, res) { };
+async function show_paths_for_device_id(req, res) {   res.json("wow")};
+async function show_paths_for_device_name(req, res) { res.json("wow2")};
 async function show_polyline_for_path_id(req, res) {
   // dinw path id
   var path_id=(req.params)['path_id']
@@ -93,7 +93,7 @@ async function show_polyline_for_path_name(req, res) {
 
 module.exports.find_closest_devices = find_closest_devices;
 
-//module.exports.show_paths_for_device_id = show_paths_for_device_id;
-//module.exports.show_paths_for_device_name = show_paths_for_device_name;
+module.exports.show_paths_for_device_id = show_paths_for_device_id;
+module.exports.show_paths_for_device_name = show_paths_for_device_name;
 module.exports.show_polyline_for_path_id = show_polyline_for_path_id;
 module.exports.show_polyline_for_path_name = show_polyline_for_path_name;
