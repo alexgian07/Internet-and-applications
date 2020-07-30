@@ -51,25 +51,38 @@ var devices_object_list= JSON.parse(devices_in_string_format)
   Http1.send();
   var polyline_in_string_format = Http1.responseText
   var coords = polyline_in_string_format.split(' ')
+  //console.log(coords)
   var final_polyline=[]
   for (var i = 0; i < coords.length; i++)
-    {
+    { console.log("heyyy")
        var first_split = coords[i]
         var temp_string = first_split.split(',')
         var temp_lat=temp_string[0]
         var temp_lon=temp_string[1]
-        for (var j = 0; i < devices_object_list.length; i++)
-        { var temp_obj = devices_object_list[j]
+      //  console.log("TEMP")
+      //  console.log(temp_lat)
+      //  console.log(temp_lon)
+        for (var j = 0; j < devices_object_list.length; j++)
+
+        { //console.log("wowwwwwwwwww")
+          var temp_obj = devices_object_list[j]
+        //  console.log(temp_obj)
           var device_id=temp_obj['device_id']
           var device_Name=temp_obj['device_Name']
           var device_lat=temp_obj['lat']
+        //  console.log("Device")
+        //  console.log(typeof(device_lat))
+          console.log( '20.636367'=='20.636367')
           var device_lon=temp_obj['lon']
+            //console.log(typeof(device_lon))
           if (temp_lat == device_lat &&  temp_lon== device_lon)
-              {   final_polyline.push((device_id,device_Name)) }
+              {   console.log("wowwww")
+                  final_polyline.push((device_id,device_Name)) }
        }
     }
-    console.log(final_polyline)
-  res.json(JSON.stringify(final_polyline))
+    console.log(final_polyline.length)
+   //console.log(final_polyline)
+  res.json(Http.status)
 };
 
 async function show_polyline_for_path_name(req, res) {

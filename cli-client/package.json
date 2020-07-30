@@ -1,0 +1,19 @@
+{
+  "name": "appathon_cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": "",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "commander": "^4.1.1",
+    "request": "^2.88.2"
+  },
+  "bin": {
+    "alex_app": "./bin/index.js"
+  }
+}
