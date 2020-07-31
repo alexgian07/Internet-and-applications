@@ -6,113 +6,93 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Http = new XMLHttpRequest();
 const Http1 = new XMLHttpRequest();
 const devices_url = 'http://feed.opendata.imet.gr:23577/itravel/devices.json';
-const getDeviceCoords_url='http://147.102.16.56:8080/services/getDeviceCoords/'
-const  getDeviceName_url='http://147.102.16.56:8080/services/getDeviceName/'
-const paths_url = 'http://feed.opendata.imet.gr:23577/itravel/paths'
+const getDeviceCoords_url = 'http://147.102.19.45:8080/services/getDeviceCoords/'
+const getDeviceName_url = 'http://147.102.19.45:8080/services/getDeviceName/'
+const paths_url = 'http://feed.opendata.imet.gr:23577/itravel/paths.json'
 //hey
 async function find_closest_devices(req, res) {
-//pairnw tis suntetagmenes apo to post request
-  //console.log(req.params)
+
   var parameters_json = req.params
   var lat = parameters_json['lat']
-  var lon=parameters_json['lon']
-  //console.log(lat)
-  // kanw aithsh gia ta device id's sto devices_url
-  Http.open("GET", devices_url, true);
+  var lon = parameters_json['lon']
+  var coords = {lat:lat, lon:lon};
+//  var temp_device={lat:lat, lon:lon,id:0,Name:'temp',distance:0};
+  Http.open("GET", devices_url, false);
   Http.send();
-  Http.onreadystatechange = (e) => {
-    //console.log(Http.responseText)
-    var devices_in_string_format = Http.responseText
-  }
-// brhka ola ta device id's kai twra  apo auta tha brw ta device coords me to 1o web service kai ta device names me to 2o
-  //ektelw sunarthsh apo generalUtilities pou briskei tis 5 pio kontines staseis kai exw to apotelesma etoimo
-const result = await utilities.resolveAfterNSeconds(2); // perimenw ligo gia na ginei to request
+  utilities.resolveAfterNSeconds(4)
+//  console.log("WWWWWWWWWWWWWWW")
+  var devices_in_string_format = Http.responseText
+//  console.log(devices_in_string_format)
+  var devices_list=JSON.parse(Http.responseText)
+  var closest_list=[]
+  //console.log(devices_list)
+ for (var j = 0; j < devices_list.length; j++) {
+    var device = devices_list[j]
+    var temp_device={lat:lat, lon:lon,id:0,Name:'temp',distance:0};
+  //  console.log(device)
+  //  console.log(device)
+     temp_device.lat=device['lat']
+     temp_device.lon=device['lon']
+     temp_device.Name=device['device_Name']
+     temp_device.id=device['device_id']
+    var distance=utilities.calculateDistance(coords,temp_device)
+    temp_device.distance=distance
+  // console.log(temp_device)
+    closest_list.push(temp_device)
+  //  console.log(closest_list)
+  //  console.log(closest_list.length)
+  // console.log(temp_device)
+    //console.log(closest_list.length)
 
-// exw brei to apotelesma kai to epistrefw
-  res.json(Http.status)
+  }
+// console.log(closest_list)
+var result = utilities.find_five_closest_devices(closest_list)
+//res.json(JSON.stringify(result))
+res.json(result)
+//res.json("wow")
 };
 
-async function show_paths_for_device_id(req, res) {   res.json("wow")};
-async function show_paths_for_device_name(req, res) { res.json("wow2")};
+async function show_paths_for_device_id(req, res) {
+  res.json("wow")
+};
+async function show_paths_for_device_name(req, res) {
+  res.json("wow2")
+};
 
 async function show_polyline_for_path_id(req, res) {
   // dinw path id
-  var path_id=(req.params)['path_id']
-// briskw ola ta devices
-  Http.open("GET", devices_url,false);
-  Http.send();
- if (Http.readyState == 4 && Http.status == 200) {
-   var devices_in_string_format = Http.responseText
-  //console.log(JSON.parse(devices_in_string_format)[0]['lat'])
- }
-var devices_object_list= JSON.parse(devices_in_string_format)
-//zhtaw to polyline gia to dothen path_id
-  Http1.open("GET", 'http://147.102.16.56:8080/services/getPathPolyline/'+path_id , false);
+  var path_id = (req.params)['path_id']
+
+  Http1.open("GET", 'http://147.102.19.45:8080/services/getPathPolyline/' + path_id, false);
   Http1.send();
   var polyline_in_string_format = Http1.responseText
   var coords = polyline_in_string_format.split(' ')
-  //console.log(coords)
-  var final_polyline=[]
-  for (var i = 0; i < coords.length; i++)
-    { console.log("heyyy")
-       var first_split = coords[i]
-        var temp_string = first_split.split(',')
-        var temp_lat=temp_string[0]
-        var temp_lon=temp_string[1]
-      //  console.log("TEMP")
-      //  console.log(temp_lat)
-      //  console.log(temp_lon)
-        for (var j = 0; j < devices_object_list.length; j++)
+  console.log(coords)
 
-        { //console.log("wowwwwwwwwww")
-          var temp_obj = devices_object_list[j]
-        //  console.log(temp_obj)
-          var device_id=temp_obj['device_id']
-          var device_Name=temp_obj['device_Name']
-          var device_lat=temp_obj['lat']
-        //  console.log("Device")
-        //  console.log(typeof(device_lat))
-          console.log( '20.636367'=='20.636367')
-          var device_lon=temp_obj['lon']
-            //console.log(typeof(device_lon))
-          if (temp_lat == device_lat &&  temp_lon== device_lon)
-              {   console.log("wowwww")
-                  final_polyline.push((device_id,device_Name)) }
-       }
-    }
-    console.log(final_polyline.length)
-   //console.log(final_polyline)
-  res.json(Http.status)
+  res.json(coords)
 };
 
 async function show_polyline_for_path_name(req, res) {
-
-
-  // dinw path id
-  var path_name=(req.params)['path_name']
-  //euresh  path_id apo path_name
-  console.log(path_name)
- var   path_id=path_name
-  Http.open("GET", 'http://147.102.16.56:8080/services/getPathPolyline/'+path_id , true);
+  var path_name = (req.params)['path_name']
+  //console.log(typeof(path_name))
+  Http.open("GET", paths_url, false);
   Http.send();
-  Http.onreadystatechange = (e) => {
-    //console.log(Http.responseText)
-    var polyline_in_string_format = Http.responseText
+  var paths_list = JSON.parse(Http.responseText)
+ for (var j = 0; j < paths_list.length; j++) {
+    var temp_obj = paths_list[j]
+
+    //console.log(paths_list[j]['Path_Name'])
+    if ((temp_obj['Path_Name']) == path_name) {
+      var path_id = temp_obj['Path_id']
+    }
   }
-  const result = await utilities.resolveAfterNSeconds(2); // perimenw ligo gia na ginei to request
- //briskw apo tis suntetagmenes to kathe device id gia na to epistrepsw se kalh morfh
-  // exw brei to apotelesma kai to epistrefw
-  var coords = Http.responseText.split(' ')
-  // for i in coords_list
-  var first = coords[0]
-  var temp_string = first.split(',')
-  var temp_lat=temp_string[0]
-  var temp_lon=temp_string[1]
-  // briskw devide _name kai id apo suntetagmenes
-
-
-  //console.log(Http.status)
-  res.json(Http.status)
+  //console.log(path_id)
+  Http1.open("GET", 'http://147.102.19.45:8080/services/getPathPolyline/' + path_id, false);
+  Http1.send();
+  var polyline_in_string_format = Http1.responseText
+  var coords = polyline_in_string_format.split(' ')
+  // console.log(coords)
+ res.json(coords)
 };
 
 module.exports.find_closest_devices = find_closest_devices;

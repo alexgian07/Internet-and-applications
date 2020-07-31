@@ -4,7 +4,7 @@ const path = require('path')
 //const notesPath = path.resolve(os.homedir(), 'softeng19bAPI.token')
 
 function request_and_respond(opt, program) {
-console.log("find_closest_devices")
+console.log("show_paths_for_device_name")
     program.help()
 
 }
