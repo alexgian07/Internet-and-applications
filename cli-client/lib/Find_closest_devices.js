@@ -8,12 +8,13 @@ const Http1 = new XMLHttpRequest();
 
 
 function request_and_respond(opt, program) {
-
+if (("lat" in opt) && ("lon" in opt) ) {
   Http.open("POST",'http://localhost:3000/find_closest_devices/'+opt['lat']+'/'+opt['lon'] , false);
   Http.send()
   var result=JSON.parse(Http.responseText)
   console.log(result)
-
+}
+else { program.help() }
    }
 
 
