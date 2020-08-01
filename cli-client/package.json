@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "commander": "^4.1.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "xmlhttprequest": "^1.8.0"
   },
   "bin": {
     "alex_app": "./bin/index.js"
