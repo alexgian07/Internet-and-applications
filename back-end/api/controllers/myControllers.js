@@ -19,7 +19,7 @@ async function find_closest_devices(req, res) {
 //  var temp_device={lat:lat, lon:lon,id:0,Name:'temp',distance:0};
   Http.open("GET", devices_url, false);
   Http.send();
-  utilities.resolveAfterNSeconds(4)
+//  utilities.resolveAfterNSeconds(4)
 //  console.log("WWWWWWWWWWWWWWW")
   var devices_in_string_format = Http.responseText
 //  console.log(devices_in_string_format)
@@ -53,6 +53,25 @@ res.json(result)
 };
 
 async function show_paths_for_device_id(req, res) {
+
+  Http.open("GET", devices_url, false);
+  Http.send();
+
+  var devices_in_string_format = Http.responseText
+
+  var devices_list=JSON.parse(Http.responseText)
+
+
+ for (var j = 0; j < devices_list.length; j++) {
+    var device = devices_list[j]
+    var temp_device={lat:lat, lon:lon,id:0,Name:'temp'};
+     temp_device.lat=device['lat']
+     temp_device.lon=device['lon']
+     temp_device.Name=device['device_Name']
+     temp_device.id=device['device_id']
+}
+
+
   res.json("wow")
 };
 async function show_paths_for_device_name(req, res) {
