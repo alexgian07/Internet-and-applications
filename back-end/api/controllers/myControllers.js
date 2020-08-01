@@ -53,29 +53,69 @@ res.json(result)
 };
 
 async function show_paths_for_device_id(req, res) {
-
-  Http.open("GET", devices_url, false);
+ var device_id = (req.params)['device_id']
+  Http.open("GET", paths_url, false);
   Http.send();
+  var paths_in_string_format = Http.responseText
+  var paths_list=JSON.parse(Http.responseText)
 
-  var devices_in_string_format = Http.responseText
+  var final_list=[]
+ for (var j = 0; j < paths_list.length; j++) {
+    var path = paths_list[j]
+    var temp_path={Path_id:0, Path_Name:'temp',Path_origin_device_id:0,Path_destination_device_id:0,Device_position_in_the_path:'Unknown yet'};
+     temp_path.Path_id=path['Path_id']
+     temp_path.Path_Name=path['Path_Name']
+     temp_path.Path_origin_device_id=path['Path_origin_device_id']
+     temp_path.Path_destination_device_id=path['Path_destination_device_id']
+    if (device_id==temp_path.Path_origin_device_id )
+      {temp_path.Device_position_in_the_path='Start of the Path'
+        final_list.push(temp_path)   }
+    if (device_id==temp_path.Path_destination_device_id)
+      {temp_path.Device_position_in_the_path='End of the Path'
+        final_list.push(temp_path)  }
 
-  var devices_list=JSON.parse(Http.responseText)
-
-
- for (var j = 0; j < devices_list.length; j++) {
-    var device = devices_list[j]
-    var temp_device={lat:lat, lon:lon,id:0,Name:'temp'};
-     temp_device.lat=device['lat']
-     temp_device.lon=device['lon']
-     temp_device.Name=device['device_Name']
-     temp_device.id=device['device_id']
 }
 
 
-  res.json("wow")
+  res.json(final_list)
 };
 async function show_paths_for_device_name(req, res) {
-  res.json("wow2")
+
+  var device_name = (req.params)['device_name']
+
+  Http1.open("GET", devices_url, false);
+  Http1.send();
+  var devices_in_string_format = Http1.responseText
+  var devices_list=JSON.parse(Http1.responseText)
+//  paths_list=[]
+  for (var j = 0; j < devices_list.length; j++) {
+  if (device_name==devices_list[j]['device_Name'])
+      { var device_id=devices_list[j]['device_id'] }
+  }
+
+   Http.open("GET", paths_url, false);
+   Http.send();
+   var paths_in_string_format = Http.responseText
+   var paths_list=JSON.parse(Http.responseText)
+
+   var final_list=[]
+  for (var j = 0; j < paths_list.length; j++) {
+     var path = paths_list[j]
+     var temp_path={Path_id:0, Path_Name:'temp',Path_origin_device_id:0,Path_destination_device_id:0,Device_position_in_the_path:'Unknown yet'};
+      temp_path.Path_id=path['Path_id']
+      temp_path.Path_Name=path['Path_Name']
+      temp_path.Path_origin_device_id=path['Path_origin_device_id']
+      temp_path.Path_destination_device_id=path['Path_destination_device_id']
+     if (device_id==temp_path.Path_origin_device_id )
+       {temp_path.Device_position_in_the_path='Start of the Path'
+         final_list.push(temp_path)   }
+     if (device_id==temp_path.Path_destination_device_id)
+       {temp_path.Device_position_in_the_path='End of the Path'
+         final_list.push(temp_path)  }
+
+  }
+   res.json(final_list)
+
 };
 
 async function show_polyline_for_path_id(req, res) {
