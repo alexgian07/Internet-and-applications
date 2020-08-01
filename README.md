@@ -23,3 +23,32 @@ Alex Giannoulis  - 03115199
 Ενδέχεται να προσθέσω συμπληρωματικές λειτουργίες , αν προλάβω..
 
 Θα γίνει ως επι το πλείστον χρήση nodejs για την υλοποίηση.Συγκεκριμένα, θα χρησιμοποιήσω τις βιβλιοθήκες express και commander για το api ( server)  και το cli , αντίστοιχα .
+
+
+
+## Στήσιμο του back-end
+Ενώ είμαστε στο directory του back-end σε ένα command-line γράφουμε :
+```
+npm install
+```
+(για τα dependancies απο modules)
+```
+npm run start
+```
+( για την εκκίνηση του server)
+
+
+## Στήσιμο του CLI
+Ενώ είμαστε στο directory του cli σε ένα command-line γράφουμε :
+```
+npm install
+```
+(για τα dependancies απο modules)
+```
+npm link
+```
+
+
+
+ **Χρήση:**
+ Απο οποιοδήποτε directory σε τερματικό μπορούμε πλέον να χρησιμοποιήσουμε την εφαρμογή **alex_app**
