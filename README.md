@@ -48,6 +48,7 @@ npm install
 npm link
 ```
 
+## Στήσιμο του CLI
 
 
  **Χρήση:**
