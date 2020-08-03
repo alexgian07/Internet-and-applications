@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscripts.js"></script>
+</head>
+
+
+<body>
+
+<div class="header">
+<h1>Γιαννούλης Αλέξανδρος - 03115199  </h1>
+<h2>alex_app </h2>
+ <a style="text-align:right" href="https://github.com/alexgian07/Internet-and-applications">Visit this application's github page!</a>
+</div>
+
+
+
+<article>
+    <h1> basic documentation</h1>
+    <p>Make sure that alex_app back-end is up and running</p>
+    <p>Choose a utility and enter the parameter(s) required</p>
+    <p>If more than one parameter is required,separete them with "-"</p>
+    <p>Confirm your choice using the appropriate button and:  Press the button below to   load the results in a new window</p>
+    <p>Be careful,not to type unneccessary spaces!</p>
+    <!-- <embed src="Curriculum-Vitae.pdf" width="800px" height="2100px" /> -->
+  </article>
+
+
+
+<h3>Find_closest_devices</h3>
+<input type="text" id="T1"  size="50" value="ex. 40.647450413-22.9352212  ">
+<button   onclick="myFunction(1)">Confirm Choice</button>
+<p   id="1"></p>
+
+
+
+
+<h3>Show_polyline_for_path_id</h3>
+<input type="text" id="T2"   size="50" value="ex. 12">
+<button onclick="myFunction(2)">Confirm Choice</button>
+<p id="2"></p>
+
+
+<h3>Show_polyline_for_path_name</h3>
+<input type="text" id="T3" size="50" value="ex. Lagada (Ag. Panton) - Platia Dimokratias (Vardaris)">
+<button onclick="myFunction(3)">Confirm Choice</button>
+<p id="3"></p>
+
+
+<h3>Show_paths_for_device_id</h3>
+<input type="text" id="T4"   size="50" value="ex. 12">
+<button onclick="myFunction(4)">Confirm Choice</button>
+<p id="4"></p>
+
+
+
+
+<h3>Show_paths_for_device_name</h3>
+<input type="text" id="T5"   size="50" value="ex. iTravel-1-V. Olgas">
+<button onclick="myFunction(5)">Confirm Choice</button>
+
+<p id="5"></p>
+
+<form id="my_form" method="post" action=""
+  target="_blank">
+<input type="hidden" name="name1" value="value1">
+<input type="hidden" name="name2" value="value2">
+<input type="submit" value="Press to open results in a new window">
+</form>
+
+<!--
+<h3>Trial</h3>
+<input type="submit" id="T6"  formmethod = "post" formaction = 'results.html' size="50" >
+<button onclick="document.getElementById("T6").value=document.getElementById("my_form").action">Confirm Choice</button>
+-->
+
+<div id="right_side">
+<input type=submit value = "Open full documentation in pdf"onclick="window.open('README.pdf'); return true;" >
+</div>
+
+<!--
+<p align="center"><iframe id ="my_frame" width= 800 height =500 src='' title="my_frame"></iframe></p>
+-->
+
+<!--<button onclick="create_frame()">Show results here</button> -->
+
+<div class="footer">
+<p>&copy; 2020 Alex Giannoulis - 03115199<p>
+</div>
+
+
+
+</body>
+</html>
