@@ -20,7 +20,6 @@ async function find_closest_devices(req, res) {
   Http.open("GET", devices_url, false);
   Http.send();
 //  utilities.resolveAfterNSeconds(4)
-//  console.log("WWWWWWWWWWWWWWW")
   var devices_in_string_format = Http.responseText
 //  console.log(devices_in_string_format)
   var devices_list=JSON.parse(Http.responseText)
