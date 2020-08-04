@@ -2,7 +2,9 @@
 Final project for "Internet and applications" course
 
 ## Παρουσίαση Βίντεο :
-https://drive.google.com/file/d/1w_GN18YJKLD-o9JnFqfalokbe5dgJjO9/view?usp=sharing
+https://drive.google.com/file/d/1w_GN18YJKLD-o9JnFqfalokbe5dgJjO9/view?usp=sharing ( Google Drive)
+
+https://youtu.be/nHpmuy5jP2w   ( Youtube )
 
 Alex Giannoulis  - 03115199
 
