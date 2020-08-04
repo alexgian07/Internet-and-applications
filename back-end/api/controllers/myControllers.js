@@ -29,7 +29,6 @@ async function find_closest_devices(req, res) {
     var device = devices_list[j]
     var temp_device={lat:lat, lon:lon,id:0,Name:'temp',distance:0};
   //  console.log(device)
-  //  console.log(device)
      temp_device.lat=device['lat']
      temp_device.lon=device['lon']
      temp_device.Name=device['device_Name']
