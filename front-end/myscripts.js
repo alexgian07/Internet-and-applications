@@ -1,10 +1,4 @@
 
-function create_frame() {
-var ifrm = document.createElement('iframe');
-ifrm.setAttribute('id', 'ifrm'); // assign an id
-document.body.appendChild(ifrm);
-ifrm.setAttribute(document.getElementById("my_form"), 'results.html');
-}
 
 function myFunction(i) {
   var x = document.getElementById("T"+i).value;
